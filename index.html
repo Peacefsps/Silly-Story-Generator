@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Silly Story Generator</title>
+</head>
+<style>
+    input[type=text] {
+        padding: 6px;
+        border-radius: 4px;
+        margin: 10px 0;
+        border: 0.5px solid;
+    }
+    input[type=button] {
+        background-color: red;
+        border: none;
+        margin: 10px 0;
+        padding: 10px;
+        color: white;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+    p {
+        background-color: rgb(255, 193, 37);
+        color: rgb(94, 38, 18);
+        width: 350px;
+        padding: 5px;
+        word-spacing: 8px;
+        font-size: 16px;
+        color: black;
+        display: none;
+    }
+</style>
+<body>
+    <div>
+        <form>
+            <label for="custom">Enter custom name:</label>
+            <input type="text" name="custom" class="customname"><br>
+            <label for="country">US</label>
+            <input type="radio" name="country" class="usselect" checked>
+            <label for="country">UK</label>
+            <input type="radio" name="country" class="ukselect"><br>
+            <input type="button" class="generatestory" value="Generate random story">
+        </form>
+        <p class="displaystory">It was <span id="tempchange"></span> outside, so Willy the Goblin went 
+            for a walk. When they got to the soup kitchen, they stared in horror for a 
+            few moments, then spontaneously combusted. <span id="namechange">Bob</span> saw the whole thing, but was 
+            not surprised — Willy the Goblin weighs 21 stone, and it was a hot day.</p>
+    </div>
+</body>
+</html>
+<script>
+    const tempChange = document.getElementById("tempchange")
+    const nameChange = document.getElementById("namechange")
+    const customNameField = document.querySelector(".customname");
+    const generateStory = document.querySelector(".generatestory");
+    const displayStory = document.querySelector(".displaystory");
+    const usSelect = document.querySelector(".usselect");
+    const ukSelect = document.querySelector(".ukselect");
+    const fah = 90;
+    let newStory = "It was 90 fahrenheit outside, so Willy the Goblin went for a walk. When they got to the soup kitchen, they stared in horror for a few moments, then spontaneously combusted. saw the whole thing, but was not surprised — Willy the Goblin weighs 21 stone, and it was a hot day."
+    
+    
+    generateStory.addEventListener("click", function() {
+        displayStory.style.display = "block"
+        nameChange.innerHTML = customNameField.value;
+        convertToCel();
+        convertToFah()
+    })
+    function convertToFah() {
+        tempChange.innerHTML = `${fah} fahrenheit`
+    }
+    function convertToCel() {
+     const celsiusToFah = Number((5*(fah - 32))/9)
+     tempChange.innerHTML = `${Math.round(celsiusToFah)} centrigade`
+    }
+    usSelect.addEventListener("click", convertToFah)
+    ukSelect.addEventListener("click", convertToCel)
+    // function generateString() {
+    //     let result = ' '
+    //     let newStoryLength = newStory.length
+    //     for (let i = 0; i < newStoryLength; i++) {
+    //         resultAll = newStory.charAt(Math.floor(Math.random() * newStoryLength))
+    //     }
+    // }
+</script>
